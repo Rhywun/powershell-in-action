@@ -46,7 +46,12 @@ switch ($options)
 # ForEach
 #
 
-ForEach-Object ($f in Get-ChildItem *.txt) { $f.Length }
+foreach ($f in Get-ChildItem *.txt) { $f.length }       # statement
+Get-ChildItem *.txt | ForEach-Object { $_.Length }      # cmdlet
+
+# Begin, Process, End
+
+Get-ChildItem *.txt | ForEach-Object {$l = 0} {$l += $_.Length} {$l}
 
 #
 # ???
