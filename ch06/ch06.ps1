@@ -1,10 +1,8 @@
-# ch06.ps1
- 
 function hello {
     $OFS = ' & '
     "Hello there $args, how are you?"
 }
-hello Bob, Alice, Ted, Carol
+hello Bob Alice Ted Carol
 
 #
 
@@ -15,17 +13,17 @@ function count-args {
 count-args 1 2 3
 count-args 1,2,3
 count-args 1,2,3 4,5,6,7
- 
+
 #
- 
+
 function ql { $args }
 function qs { "$args" }
- 
+
 ql red orange yellow green blue indigo violet
 qs this is a        string
- 
+
 #
- 
+
 function subtract ($from, $count) { $from - $count }
 subtract 5 3
 subtract -from 4 -count 7
@@ -48,7 +46,7 @@ dow "April 15, 1969"
 function get-soup (
     [switch] $please,
     [string] $soup= "chicken noodle"
-) 
+)
 {
     if ($please) {
         "Here's your $soup soup."
