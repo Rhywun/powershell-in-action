@@ -119,10 +119,7 @@ function numbers2 {
     }
 }
 
-
-
-
-#
+# Debugging
 
 function my-func ($x) {
     'Getting the date'
@@ -135,6 +132,13 @@ function my-func ($x) {
 my-func
 $x = my-func
 $x
+
+# Use Out-Null or cast to [void] to discard unwanted outputs
+
+function addArgsToArrayList {
+    $a1 = New-Object -TypeName System.Collections.ArrayList
+    $args | ForEach-Object { $a1.Add($_) | Out-Null }
+}
 
 # 6.4.1
 
