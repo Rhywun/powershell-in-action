@@ -151,7 +151,31 @@ function addArgsToArrayList {
     $args | ForEach-Object { $a1.Add($_) | Out-Null }
 }
 
-# 6.4.1
+# Using simple functions in a pipeline
+
+function sum1 {
+    $total = 0;
+    foreach ($n in $input) { $total += $n }
+    $total
+}
+
+function sum2 {
+    $total=0
+    while ($input.MoveNext()) {
+        $total += $input.Current
+    }
+    $total
+}
+
+function sum3 ($property) {
+    $total=0
+    while ($input.MoveNext()) {
+        $total += $input.Current.$property
+    }
+    $total
+}
+
+# Cmdlet-like function
 
 function my-cmdlet ($x) {
     begin {
