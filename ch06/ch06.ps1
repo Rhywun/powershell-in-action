@@ -19,7 +19,7 @@ count-args 1,2,3 4,5,6,7
 function ql { $args }
 function qs { "$args" }
 
-ql red orange yellow green blue indigo violet
+$col = ql red orange yellow green blue indigo violet
 qs this is a        string
 
 #
@@ -35,13 +35,24 @@ nadd 1 2
 nadd "1" "2"
 nadd @{a=1;b=2} "2"
 
-#
+# 6.2.3
+
+function a ($x, $y) {
+    "x is $x"
+    "y is $y"
+    "args is $args"
+}
+a 1
+a 1 2
+a 1 2 3 4
+
+# 6.2.4
 
 function dow ([datetime] $d = $(Get-Date)) { $d.DayOfWeek }
 dow
 dow "April 15, 1969"
 
-#
+# 6.2.5
 
 function get-soup (
     [switch] $please,
@@ -156,3 +167,7 @@ function my-cmdlet ($x) {
     }
 }
 1, 2, 3 | my-cmdlet 22
+
+for ($g = 0; $g -lt $array.Count; $g++) {
+
+}
