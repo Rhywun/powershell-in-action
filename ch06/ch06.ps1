@@ -56,7 +56,7 @@ dow "April 15, 1969"
 
 function get-soup (
     [switch] $please,
-    [string] $soup= "chicken noodle"
+    [string] $soup = "chicken noodle"
 )
 {
     if ($please) {
@@ -69,12 +69,12 @@ get-soup
 get-soup -please
 get-soup -please tomato
 
-# Get/Update/Set
+# 6.2.6 - Get/Update/Set
 
 $characterData = @{
-    'Linus'  = @{ age = 8; human = $true}
-    'Lucy'   = @{ age = 8; human = $true}
-    'Snoopy' = @{ age = 2; human = $true}
+    'Linus'  = @{ age = 8; human = $true }
+    'Lucy'   = @{ age = 8; human = $true }
+    'Snoopy' = @{ age = 2; human = $true }
 }
 
 function Get-Character ($name = '*') {
@@ -101,7 +101,8 @@ function Update-Character (
     [string] $name = '*',
     [int] $age,
     [bool] $human
-) {
+)
+{
     begin {
         if ($PSBoundParameters.'name') {
             $name = $PSBoundParameters.name
@@ -118,9 +119,14 @@ function Update-Character (
     }
 }
 
-#
+# 6.3 - All expressions are output/returned!
 
-function numbers { 2+2; 9/3; [math]::Sqrt(27) }
+function numbers { 2 + 2; 9/3; [math]::Sqrt(27) }
+# 4
+# 3
+# 5.19615242270663
+
+# An array is automatically created to capture output
 
 function numbers2 {
     $i = 1
@@ -130,19 +136,19 @@ function numbers2 {
     }
 }
 
-# Debugging
+# 6.3.1 - Debugging
 
 function my-func ($x) {
-    'Getting the date'
+    Write-Host 'Getting the date'                      # Write-Host behavior is different!
     $x = Get-Date
-    "Date is $x, now getting the day"
+    Write-Debug "Date is $x, now getting the day"      # So is Write-Debug
     $day = $x.Day
     'Returning the day'
     $day
 }
 my-func
-$x = my-func
-$x
+$result = my-func
+$result
 
 # Use Out-Null or cast to [void] to discard unwanted outputs
 
@@ -151,7 +157,7 @@ function addArgsToArrayList {
     $args | ForEach-Object { $a1.Add($_) | Out-Null }
 }
 
-# Using simple functions in a pipeline
+# 6.4 - Using simple functions in a pipeline
 
 function sum1 {
     $total = 0;
