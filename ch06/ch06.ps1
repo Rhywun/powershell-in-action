@@ -164,22 +164,25 @@ function sum1 {
     foreach ($n in $input) { $total += $n }
     $total
 }
+1,2,3 | sum1
 
 function sum2 {
-    $total=0
+    $total = 0
     while ($input.MoveNext()) {
         $total += $input.Current
     }
     $total
 }
+1,2,3 | sum2
 
 function sum3 ($property) {
-    $total=0
+    $total = 0
     while ($input.MoveNext()) {
         $total += $input.Current.$property
     }
     $total
 }
+gci | sum3 length
 
 # Cmdlet-like function
 
