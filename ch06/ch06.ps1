@@ -182,13 +182,13 @@ function sum3 ($property) {
     }
     $total
 }
-gci | sum3 length
+Get-ChildItem | sum3 length
 
 # Cmdlet-like function
 
 function my-cmdlet ($x) {
     begin {
-        $c=0
+        $c = 0
         "In Begin, c is $c, x is $x"
     }
     process {
