@@ -37,4 +37,9 @@ foreach ($i in 1..10) {if ($i % 2) {"$i is odd"}}
 
 1..10 | ForEach-Object {if ($_ % 2) {"$i is odd"}}
 
-#
+# Parameter binding & quotes
+# all of these are equivalent
+
+Write-Output -InputObject "-InputObject"
+Write-Output "-InputObject"
+Write-Output -- -InputObject
