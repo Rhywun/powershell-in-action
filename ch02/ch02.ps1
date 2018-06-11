@@ -1,6 +1,4 @@
-#
 # Types
-#
 
 # Find a type
 function Find-Type {
@@ -8,12 +6,16 @@ function Find-Type {
     [System.AppDomain]::CurrentDomain.GetAssemblies().GetTypes() | Select-String $Pattern
 }
 
+$hs = @"
+This
+is a
+"here-string"
+"@
+
 # Find an assembly & its details
 [powershell].Assembly.Location | Get-ChildItem | Select-Object LastWriteTime
 
-#
 # Hashtables
-#
 
 $user = @{ FirstName = 'Joe'; LastName = 'Blow'; PhoneNumber = '555-1212' }
 
@@ -35,9 +37,7 @@ $user['City'] = 'Seattle'
 # This doesn't do what you might expect:
 Write-Host "$user" # System.Collections.Hashtable
 
-#
 # Arrays
-#
 
 $a = 1, 2, 3
 $a.GetType().FullName # System.Object[]
@@ -50,9 +50,7 @@ $a # $a 3.14159265358979 2 Hi, there. 44 55 (with line breaks)
 @(1) # also a singleton
 @() # an empty array
 
-#
 # Type literals
-#
 
 [int] '123'
 [int[]] '123'
@@ -64,17 +62,20 @@ $a # $a 3.14159265358979 2 Hi, there. 44 55 (with line breaks)
 $tna = [psobject].Assembly.GetType('System.Management.Automation.TypeAccelerators')::Get
 $tna.GetEnumerator() | Sort-Object Key
 
-#
 # Generics
-#
 
 $l = New-Object System.Collections.Generic.List[int]
 $l.add(1)
 $l.add(2)
 $l.add('three') # Error
 
-#
 # Static methods
-#
 
+[string] | Get-Member -Static | Format-Wide -AutoSize
 [string]::Join(', ', ('one', 'two', 'three'))
+
+# Scriptblock parameters
+
+Get-ChildItem -Path *.txt | Rename-Item -Path {$_.Name} `
+    -NewName {$_.Name -replace '\.txt$', '.dat'} -WhatIf
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
