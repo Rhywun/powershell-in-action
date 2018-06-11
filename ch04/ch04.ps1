@@ -1,15 +1,28 @@
-# How to not discard the result of the increment operator
+# Type operators
+
+('123' -as 'int') + 456 # 579
+
+# Unary operators typically discard the result
+
 $l = 1
-foreach ($s in 'one', 'two', 'three')
-    {"$(($l++)): $s"}
+foreach ($s in 'one', 'two', 'three') { "$($l++): $s" }
+
+# How to not discard the result of the increment operator - wrap in parens
+$l = 1
+foreach ($s in 'one', 'two', 'three') { "$(($l++)): $s" }
+
+# Grouping and subexpressions
+
+# subexpression + cast to void discards result of expressions that return a value
+[void] $(Write-Output "discard me")
 
 # Count the number of elements in the Fibonacci sequence below 100
-$($c = $p = 1; while ($c -lt 100) {$c; $c, $p = ($c + $p), $c}).count
+$($c = $p = 1; while ($c -lt 100) {$c; $c, $p = ($c + $p), $c}).Count
 
 'hello, world'.Length
 
-(1,2,3,4,5).Length
-(1,2,3,4,5).Count
+(1, 2, 3, 4, 5).Length
+(1, 2, 3, 4, 5).Count
 
 'hello, world'.('len' + 'gth')
 
@@ -36,7 +49,7 @@ $method = 'sin'
 
 # Format operator
 
-'|{0,10}| 0x{1:x}|{2,-10}|' -f 10,20,30
+'|{0,10}| 0x{1:x}|{2,-10}|' -f 10, 20, 30
 
 # Variables
 
